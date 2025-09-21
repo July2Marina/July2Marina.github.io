@@ -1,4 +1,4 @@
-/* GENERAL ANIMATION SETTINGS */
+/* ========== GENERAL ANIMATION SETTINGS (safe for single image) ========== */
 
 .animate-top-left,
 .reverse-animate-top-left,
@@ -9,201 +9,78 @@
 .animate-bottom-right,
 .reverse-animate-bottom-right {
   animation-fill-mode: forwards;
-  animation-duration: 0.2s;
+  animation-duration: 0.25s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }
 
-/* HOVER ANIMATION */
-
+/* sanftes Schweben (kannst du auf #hero__animation lassen) */
 @keyframes hover {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
 }
 
-/* ANIMATE TOP LEFT */
+/* ========== SAFE KEYFRAMES (kein background-image Swap mehr) ========== */
+/* Idee: leichte Translation/Scale/Opacity – Bild bleibt gleich */
 
-.animate-top-left {
-  animation-name: top-left;
+@keyframes face-in {
+  0%   { transform: translateY(6px) scale(0.98); opacity: 0.85; }
+  100% { transform: translateY(0)    scale(1.00); opacity: 1; }
 }
 
-.reverse-animate-top-left {
-  animation-name: reverse-top-left;
+@keyframes face-out {
+  0%   { transform: translateY(0)    scale(1.00); opacity: 1; }
+  100% { transform: translateY(6px)  scale(0.98); opacity: 0.85; }
 }
 
-@keyframes top-left {
-  0% {
-    background-image: var(--tl-1);
-  }
-  25% {
-    background-image: var(--tl-2);
-  }
-  50% {
-    background-image: var(--tl-3);
-  }
-  75% {
-    background-image: var(--tl-4);
-  }
-  100% {
-    background-image: var(--tl-5);
-  }
+/* für Richtungen (optional andere Offsets, purely visual) */
+@keyframes face-in-top-left {
+  0%   { transform: translate(-6px, -6px) scale(0.98); opacity: 0.85; }
+  100% { transform: translate(0, 0)       scale(1.00); opacity: 1; }
+}
+@keyframes face-out-top-left {
+  0%   { transform: translate(0, 0)       scale(1.00); opacity: 1; }
+  100% { transform: translate(-6px, -6px) scale(0.98); opacity: 0.85; }
 }
 
-@keyframes reverse-top-left {
-  0% {
-    background-image: var(--tl-5);
-  }
-  25% {
-    background-image: var(--tl-4);
-  }
-  50% {
-    background-image: var(--tl-3);
-  }
-  75% {
-    background-image: var(--tl-2);
-  }
-  100% {
-    background-image: var(--tl-1);
-  }
+@keyframes face-in-top-right {
+  0%   { transform: translate(6px, -6px) scale(0.98); opacity: 0.85; }
+  100% { transform: translate(0, 0)      scale(1.00); opacity: 1; }
 }
-.animate-top-right {
-  animation-name: top-right;
+@keyframes face-out-top-right {
+  0%   { transform: translate(0, 0)      scale(1.00); opacity: 1; }
+  100% { transform: translate(6px, -6px) scale(0.98); opacity: 0.85; }
 }
 
-.reverse-animate-top-right {
-  animation-name: reverse-top-right;
+@keyframes face-in-bottom-left {
+  0%   { transform: translate(-6px, 6px) scale(0.98); opacity: 0.85; }
+  100% { transform: translate(0, 0)      scale(1.00); opacity: 1; }
+}
+@keyframes face-out-bottom-left {
+  0%   { transform: translate(0, 0)      scale(1.00); opacity: 1; }
+  100% { transform: translate(-6px, 6px) scale(0.98); opacity: 0.85; }
 }
 
-@keyframes top-right {
-  0% {
-    background-image: var(--tr-1);
-  }
-  25% {
-    background-image: var(--tr-2);
-  }
-  50% {
-    background-image: var(--tr-3);
-  }
-  75% {
-    background-image: var(--tr-4);
-  }
-  100% {
-    background-image: var(--tr-5);
-  }
+@keyframes face-in-bottom-right {
+  0%   { transform: translate(6px, 6px) scale(0.98); opacity: 0.85; }
+  100% { transform: translate(0, 0)     scale(1.00); opacity: 1; }
+}
+@keyframes face-out-bottom-right {
+  0%   { transform: translate(0, 0)     scale(1.00); opacity: 1; }
+  100% { transform: translate(6px, 6px) scale(0.98); opacity: 0.85; }
 }
 
-@keyframes reverse-top-right {
-  0% {
-    background-image: var(--tr-5);
-  }
-  25% {
-    background-image: var(--tr-4);
-  }
-  50% {
-    background-image: var(--tr-3);
-  }
-  75% {
-    background-image: var(--tr-2);
-  }
-  100% {
-    background-image: var(--tr-1);
-  }
-}
+/* ========== CLASS MAPPINGS (behalten deine Klassennamen) ========== */
 
-/* ANIMATE BOTTOM RIGHT */
+.animate-top-left { animation-name: face-in-top-left; }
+.reverse-animate-top-left { animation-name: face-out-top-left; }
 
-.animate-bottom-right {
-  animation-name: bottom-right;
-}
+.animate-top-right { animation-name: face-in-top-right; }
+.reverse-animate-top-right { animation-name: face-out-top-right; }
 
-.reverse-animate-bottom-right {
-  animation-name: reverse-bottom-right;
-}
+.animate-bottom-left { animation-name: face-in-bottom-left; }
+.reverse-animate-bottom-left { animation-name: face-out-bottom-left; }
 
-@keyframes bottom-right {
-  0% {
-    background-image: var(--br-1);
-  }
-  25% {
-    background-image: var(--br-2);
-  }
-  50% {
-    background-image: var(--br-3);
-  }
-  75% {
-    background-image: var(--br-4);
-  }
-  100% {
-    background-image: var(--br-5);
-  }
-}
-
-@keyframes reverse-bottom-right {
-  0% {
-    background-image: var(--br-5);
-  }
-  25% {
-    background-image: var(--br-4);
-  }
-  50% {
-    background-image: var(--br-3);
-  }
-  75% {
-    background-image: var(--br-2);
-  }
-  100% {
-    background-image: var(--br-1);
-  }
-}
-/* ANIMATE BOTTOM LEFT */
-
-.animate-bottom-left {
-  animation-name: bottom-left;
-}
-
-.reverse-animate-bottom-left {
-  animation-name: reverse-bottom-left;
-}
-
-@keyframes bottom-left {
-  0% {
-    background-image: var(--bl-1);
-  }
-  25% {
-    background-image: var(--bl-2);
-  }
-  50% {
-    background-image: var(--bl-3);
-  }
-  75% {
-    background-image: var(--bl-4);
-  }
-  100% {
-    background-image: var(--bl-5);
-  }
-}
-
-@keyframes reverse-bottom-left {
-  0% {
-    background-image: var(--bl-5);
-  }
-  25% {
-    background-image: var(--bl-4);
-  }
-  50% {
-    background-image: var(--bl-3);
-  }
-  75% {
-    background-image: var(--bl-2);
-  }
-  100% {
-    background-image: var(--bl-1);
-  }
-}
+.animate-bottom-right { animation-name: face-in-bottom-right; }
+.reverse-animate-bottom-right { animation-name: face-out-bottom-right; }
