@@ -437,3 +437,92 @@ button { border: none; border-radius: 1rem; cursor: pointer; }
   background: var(--bg-alt);
   transform: translateY(0);
 }
+
+/* ============ MOBILE (<= 600px) ============ */
+@media (max-width: 600px) {
+  /* Body: etwas kompaktere Typo */
+  body { font-size: 16px; }
+
+  /* Hero kleiner bzw. bei Interaktion ausblendbar (per Body-Klasse, siehe JS unten) */
+  #hero { transform: translate(-50%, -52%); }
+  body.is-immersive #hero { display: none; }
+
+  /* Corner-Buttons kleiner, damit sie nicht stören */
+  #grid__tl__btn, #grid__tr__btn, #grid__bl__btn, #grid__br__btn {
+    width: 12rem; height: 12rem; border-radius: 45%;
+  }
+  #grid__tl__btn { top: -7.5rem; left: -7.5rem; }
+  #grid__tr__btn { top: -7.5rem; right: -7.5rem; }
+  #grid__bl__btn { bottom: -7.5rem; left: -7.5rem; }
+  #grid__br__btn { bottom: -7.5rem; right: -7.5rem; }
+
+  /* Content-Panels: volle Breite nutzbar, innen Luft */
+  #grid__tl__content, #grid__tr__content, #grid__bl__content, #grid__br__content {
+    width: 92vw;
+  }
+
+  /* ABOUT/Skills/Hobbies: Karten breiter, Text komfortabler */
+  #grid__tl__content .cards article { width: auto; min-width: 0; flex: 1; }
+  .cards__content { flex-direction: column; align-items: stretch; gap: .75rem; }
+  .cards__content__text { margin: 0; text-align: left; }
+
+  /* SKILLS: Boxen kompakt untereinander */
+  #grid__tr__content .experience { flex-direction: column; gap: 1rem; align-items: stretch; }
+  #grid__tr__content .experience__skill { width: 100%; padding: 1rem; }
+
+  #grid__tr__content .experience__skill > div {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr auto; /* Icon | Name | Level */
+    align-items: center;
+    gap: .6rem;
+    padding: .35rem 0;
+  }
+  #grid__tr__content .experience__skill > div > div { display: contents; } /* Wrapper flatten */
+  #grid__tr__content .experience__skill img { width: 1.1rem; height: 1.1rem; }
+  #grid__tr__content .experience__skill h2 { font-size: .95rem; margin: 0; }
+  #grid__tr__content .experience__skill p  { font-size: .9rem; margin: 0; white-space: nowrap; text-align: right; }
+
+  /* PROJECTS: Karten auf Handy 100% Breite, Buttons 50/50 */
+  :root { --project-card-w: 100vw; }
+  #grid__bl__content { width: 100vw; }
+  #grid__bl__content__projects { align-items: stretch; margin-top: .5rem; }
+
+  #grid__bl__content__projects .project {
+    width: 92vw; max-width: 92vw; margin: 0 auto .75rem;
+    border-radius: 1.25rem;
+  }
+
+  .project__title { font-size: 1rem; padding: .4rem .75rem; text-align: left; }
+  .project__actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; padding: .5rem .75rem .75rem;
+  }
+  .project__actions .btn { min-width: 0; height: 2.4rem; }
+
+  /* Overlay: auf Handy voll nutzbar, scrollbar */
+  .project__overlay { padding: .75rem; }
+  .overlay__content {
+    width: 92vw; max-width: 92vw; max-height: 70vh; overflow: auto; padding: 1.4rem 1rem .9rem;
+  }
+  .overlay__close { top: .6rem; right: .6rem; font-size: 1.2rem; }
+
+  /* Pfeile näher an Karte, mittig */
+  #grid__bl__content__projects .arrows-wrapper {
+    display: flex; justify-content: center; gap: .5rem; margin-top: .2rem; width: 100%;
+  }
+  #grid__bl__content__projects .arrow { width: 2.2rem; height: 2rem; }
+
+  /* CONTACT: zentriert, breiter Button */
+  #grid__br__content { width: 92vw; right: auto; }
+  #grid__br__content div { width: auto; justify-content: center; }
+  .btn-contact {
+    display: flex; align-items: center; justify-content: center;
+    width: 14rem; height: 3rem; border-radius: 2rem; padding: 0 .5rem;
+  }
+}
+
+/* ============ VERY SMALL (<= 360px) ============ */
+@media (max-width: 360px) {
+  .project__actions .btn { font-size: .9rem; }
+  #grid__tr__content .experience__skill h2 { font-size: .9rem; }
+  #grid__tr__content .experience__skill p  { font-size: .85rem; }
+}

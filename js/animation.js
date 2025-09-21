@@ -387,3 +387,23 @@ brBtn.onclick = function () {
     tlContent.style.transform = tlHidden;
   }
 };
+
+
+  // Body-Klasse toggeln, damit #hero auf Mobile ausgeblendet wird
+  (function () {
+    const body = document.body;
+    const infoBtns = document.querySelectorAll('.btn--info, .overlay__close');
+    const panelButtons = [
+      '#grid__tl__btn', '#grid__tr__btn', '#grid__bl__btn', '#grid__br__btn'
+    ].map(sel => document.querySelector(sel)).filter(Boolean);
+
+    function enterImmersive() { body.classList.add('is-immersive'); }
+    function exitImmersive()  { /* lass sie ruhig an – optional: body.classList.remove('is-immersive'); */ }
+
+    panelButtons.forEach(btn => btn.addEventListener('click', enterImmersive));
+    infoBtns.forEach(btn => btn.addEventListener('click', enterImmersive));
+    // Wenn du das Overlay schließt und das Hero wieder sehen willst:
+    document.querySelectorAll('.overlay__close').forEach(x =>
+      x.addEventListener('click', exitImmersive)
+    );
+  })();
